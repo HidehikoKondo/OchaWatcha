@@ -161,17 +161,44 @@ static AppDelegate s_sharedApplication;
 
 
 // Interactive Message
+//メッセージ受信
 - (void)session:(nonnull WCSession *)session didReceiveMessage:(nonnull NSDictionary<NSString *,id> *)message replyHandler:(nonnull void (^)(NSDictionary<NSString *,id> * __nonnull))replyHandler
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSLog( [NSString stringWithFormat:@"%s: %@", __func__, message]);
-        [NativeInterface_iOS getTextFromWatch: [message objectForKey:@"hoge"]];
+        [NativeInterface_iOS getTextFromWatch: [message objectForKey:@"message"]];
 
     });
     
     replyHandler(@{@"reply" : @"OK"});
     
+    //[self sendMessageForWatch: @"123"];
+}
 
+
+//メッセージ送信 watchへ
+- (void)sendMessageForWatch:(NSString *)message {
+    NSLog(@"----sendMessageForWatch----");
+    NSLog(message);
+    
+
+    if ([[WCSession defaultSession] isReachable])
+    {
+        [[WCSession defaultSession] sendMessage:@{@"message":[NSString stringWithFormat:message]}
+                                   replyHandler:^(NSDictionary *replyHandler) {
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           //[self.resultLabel setText:[NSString stringWithFormat:@"replyHandler = %@", replyHandler]];
+                                           NSLog(@"-- app -> watch OK!! ---");
+                                           NSLog([NSString stringWithFormat:@"replyHandler = %@", replyHandler]);
+                                       });
+                                   }
+                                   errorHandler:^(NSError *error) {
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           NSLog(@"-- app -> watch NG!! ---");
+                                       });
+                                   }
+         ];
+    }
 }
 
 

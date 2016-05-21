@@ -87,15 +87,15 @@ bool HelloWorld::init()
 
 //    /////////////////////////////
 //    // 3. add your codes below...
-//    if (auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24))
-//    {
-//        label->setName("label");
-//
-//        label->setPosition(Vec2(origin.x + visibleSize.width/2,
-//                                origin.y + visibleSize.height - label->getContentSize().height));
-//
-//        this->addChild(label, 1);
-//    }
+    if (auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24))
+    {
+        label->setName("label");
+
+        label->setPosition(Vec2(origin.x + visibleSize.width/2,
+                                origin.y + visibleSize.height - label->getContentSize().height));
+
+        this->addChild(label, 1);
+    }
 //
 //    if (auto sprite = Sprite::create("HelloWorld.png"))
 //    {

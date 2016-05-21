@@ -30,8 +30,11 @@
     AppController *appController = (AppController *)[UIApplication sharedApplication].delegate;
     if (appController)
     {
+        NSLog(@"--- cocos -> appcontroller ---");
+        NSLog([NSString stringWithUTF8String:text.c_str()]);
+        
         //TODO:
-        //[appController sendMessageForWatch:[NSString stringWithUTF8String:text]];
+        [appController sendMessageForWatch:[NSString stringWithUTF8String:text.c_str()]];
     }
 }
 
