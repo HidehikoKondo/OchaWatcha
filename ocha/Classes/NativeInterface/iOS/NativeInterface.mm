@@ -10,9 +10,9 @@
 
 #import "NativeInterface_iOS.h"
 
-#import <GameKit/GameKit.h>
-
 #include "cocos2d.h"
+
+#include "PrivateConfig.h"
 
 
 namespace cocos2dExt
@@ -21,7 +21,7 @@ namespace cocos2dExt
     void NativeInterface::getTextFromWatch(std::string text)
     {
         //イベントでわたしてみる (必要なとこで受け取る)
-        auto event = cocos2d::EventCustom("TextFromWatch");
+        auto event = cocos2d::EventCustom(EVENT_NAME__TEXTFROMWATCH);
 
         auto data = cocos2d::Value(text);
         event.setUserData(&data);

@@ -8,6 +8,8 @@
 
 #include "Step3Layer.hpp"
 
+#include "PrivateConfig.h"
+
 
 USING_NS_CC;
 

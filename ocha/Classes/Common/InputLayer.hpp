@@ -27,5 +27,9 @@ protected:
 protected:
     virtual void onEnter() override;
     virtual void onExit() override;
+
+
+public:
+    virtual void onAcceleration(cocos2d::Acceleration * acc, cocos2d::Event * unused_event) override;
 };
 #endif

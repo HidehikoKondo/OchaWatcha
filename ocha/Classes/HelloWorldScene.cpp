@@ -1,7 +1,11 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 
+#include "PrivateConfig.h"
+
+
 USING_NS_CC;
+
 
 Scene* HelloWorld::createScene()
 {
@@ -98,7 +102,7 @@ void HelloWorld::onEnter()
             }
         };
 
-        if (auto listener = EventListenerCustom::create("TextFromWatch", callback))
+        if (auto listener = EventListenerCustom::create(EVENT_NAME__TEXTFROMWATCH, callback))
         {
             this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
         }

@@ -8,6 +8,8 @@
 
 #include "TitleLayer.hpp"
 
+#include "PrivateConfig.h"
+
 
 USING_NS_CC;
 
