@@ -12,7 +12,7 @@
 @interface InterfaceController()
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *messageLabel;
 
-float xPos;
+@property (nonatomic) double xPos;
 
 @end
 
@@ -22,6 +22,10 @@ float xPos;
 }
 
 - (void)awakeWithContext:(id)context {
+    
+    
+    self.xPos = 0;
+    
     [super awakeWithContext:context];
 
     if ([WCSession isSupported]) {
@@ -59,8 +63,19 @@ float xPos;
             double yac = data.acceleration.y;
             double zac = data.acceleration.z;
             
+            
+            if((xac - _xPos) > 0.5f || (xac - _xPos) < -0.5f){
+                NSLog(@"---SWING!!---");
+                [self submit:@"SWING"];
+            }
+            
+            
+            self.xPos = xac;
+            
             // 画面に表示
-            NSLog([NSString stringWithFormat:@"x: %0.3f", xac]);
+            NSLog([NSString stringWithFormat:@"x: %0.3f", _xPos]);
+            
+            //NSLog([NSString stringWithFormat:@"x: %0.3f", xac]);
             //NSLog([NSString stringWithFormat:@"y: %0.3f", yac]);
             //NSLog([NSString stringWithFormat:@"z: %0.3f", zac]);
             
@@ -77,10 +92,16 @@ float xPos;
     [super didDeactivate];
 }
 
+
+//ボタンをタップで通知
 -(IBAction)submitNotification:(id)sender{
     NSLog(@"通知送る");
-    
-    NSDictionary *applicationDict = @{@"message" : @"SWING"};
+    [self submit:@"通知を送る"];
+}
+
+
+-(void)submit:(NSString *)message{
+    NSDictionary *applicationDict = @{@"message" : message};
     [[WCSession defaultSession] updateApplicationContext:applicationDict error:nil];
     
     
