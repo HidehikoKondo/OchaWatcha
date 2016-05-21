@@ -118,7 +118,7 @@ void Step2Layer::createHero(){
     //    log("visibleSize.width:%f, height:%f",visibleSize.width,visibleSize.height);
     //    log("winSize.width:%f, height:%f",winSize.width,winSize.height);
     //    log("origin.x:%f, y:%f",origin.x,origin.y);
-    hero = Hero::create(ImageType::Hero01);
+    hero = Hero::create(ImageType::chasen);
     hero->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.2f));
     this->addChild(hero, 0);
 }

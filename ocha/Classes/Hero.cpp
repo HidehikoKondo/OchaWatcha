@@ -44,11 +44,13 @@ bool Hero::init(ImageType heroType){
 //画像ファイル名取得
 //----------------------------------------------------
 std::string Hero::getFileName(ImageType heroType){
-    std::string name = ImageFileName.at(ImageType::Hero01);
+    std::string name = ImageFileName.at(ImageType::chasen);
     switch(heroType){
-        case ImageType::Hero01: name = ImageFileName.at(ImageType::Hero01);; break;
-        case ImageType::Enemy01: name = ImageFileName.at(ImageType::Enemy01);; break;
-        default: name = ImageFileName.at(ImageType::Hero01);
+        case ImageType::chasen: name = ImageFileName.at(ImageType::chasen);; break;
+        case ImageType::maccha: name = ImageFileName.at(ImageType::maccha);; break;
+        case ImageType::yunomi1: name = ImageFileName.at(ImageType::yunomi1);; break;
+        case ImageType::yunomi2: name = ImageFileName.at(ImageType::yunomi2);; break;
+        default: name = ImageFileName.at(ImageType::chasen);
     }
     return name;
 }

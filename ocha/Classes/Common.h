@@ -13,10 +13,10 @@
 //キャラクター画像種類
 enum ImageType
 {
-    Hero01,
-    Enemy01,
-    Bullet01,
-    table,
+    chasen,
+    maccha,
+    yunomi1,
+    yunomi2,
     retry,
     
 };
@@ -24,10 +24,10 @@ enum ImageType
 //キャラクター画像ファイル名
 const std::map<ImageType, std::string> ImageFileName
 {
-    {ImageType::Hero01, "tyasen.png"},
-    {ImageType::Enemy01, "enemy.png"},
-    {ImageType::Bullet01, "bullet.png"},
-    {ImageType::table, "table.png"},
+    {ImageType::chasen, "chasen.png"},
+    {ImageType::maccha, "maccha.png"},
+    {ImageType::yunomi1, "yunomi1.png"},
+    {ImageType::yunomi2, "yunomi2.png"},
     {ImageType::retry, "retry.png"},
 };
 
