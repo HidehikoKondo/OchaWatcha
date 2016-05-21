@@ -31,6 +31,6 @@ namespace cocos2dExt
 
     void NativeInterface::putTextToWatch(std::string text)
     {
-        
+        [NativeInterface_iOS putTextToWatch:text];
     }
 };

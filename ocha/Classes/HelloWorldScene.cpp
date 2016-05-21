@@ -3,6 +3,8 @@
 
 #include "PrivateConfig.h"
 
+#include "NativeInterface.h"
+
 
 USING_NS_CC;
 
@@ -62,24 +64,45 @@ bool HelloWorld::init()
         this->addChild(menu, 1);
     }
 
-    /////////////////////////////
-    // 3. add your codes below...
-    if (auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24))
+
+    //Put Number 1
+    if (auto label = Label::createWithSystemFont("test put number 1", "", 32.0f))
     {
-        label->setName("label");
+        auto callback = [](Ref * pSender) {
+            cocos2dExt::NativeInterface::putTextToWatch(1);
+        };
 
-        label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height - label->getContentSize().height));
+        if (auto item = MenuItemLabel::create(label, callback))
+        {
+            if (auto menu = Menu::createWithItem(item))
+            {
+                const auto pos = Point(visibleSize * 0.5f);
+                menu->setPosition(pos);
 
-        this->addChild(label, 1);
+                this->addChild(menu);
+            }
+        }
     }
 
-    if (auto sprite = Sprite::create("HelloWorld.png"))
-    {
-        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
 
-        this->addChild(sprite, 0);
-    }
+//    /////////////////////////////
+//    // 3. add your codes below...
+//    if (auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24))
+//    {
+//        label->setName("label");
+//
+//        label->setPosition(Vec2(origin.x + visibleSize.width/2,
+//                                origin.y + visibleSize.height - label->getContentSize().height));
+//
+//        this->addChild(label, 1);
+//    }
+//
+//    if (auto sprite = Sprite::create("HelloWorld.png"))
+//    {
+//        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+//
+//        this->addChild(sprite, 0);
+//    }
 
     return true;
 }
