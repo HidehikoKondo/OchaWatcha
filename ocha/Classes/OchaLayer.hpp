@@ -40,6 +40,16 @@ protected:
 //public:
     CC_SYNTHESIZE_READONLY(int, _stepIndex, StepIndex);
 
+    //Step4 お茶まわし確認用
+    CC_SYNTHESIZE_READONLY(float, _rotateLastStep, RotateLastStep); //一つ前
+    CC_SYNTHESIZE_READONLY(float, _rotateFirstStep, RotateFirstStep); //最初の値(回転確認用)
+    CC_SYNTHESIZE_READONLY(float, _rotateStep, RotateStep); //集計用
+
+    //Step6 お茶飲み確認用
+    CC_SYNTHESIZE_READONLY(bool, _accCheck, AccCheck);      //お茶のみ確認用 (一旦角度がついてから水平に戻ったら)
+    CC_SYNTHESIZE_READONLY(bool, _accCheck2, AccCheck2);    //お茶のみ確認用 (一度はグイッと飲むこと)
+
+
 protected:
     void step1();
     void step2();
