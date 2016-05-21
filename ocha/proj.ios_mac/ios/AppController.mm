@@ -28,6 +28,7 @@
 #import "AppDelegate.h"
 #import "RootViewController.h"
 
+
 @implementation AppController
 
 #pragma mark -
@@ -143,6 +144,37 @@ static AppDelegate s_sharedApplication;
 - (void)dealloc {
     [window release];
     [super dealloc];
+}
+
+-(void)application:(UIApplication *)application handleWatchKitExtensionRequest:(NSDictionary *)userInfo reply:(void (^)(NSDictionary *))reply{
+    NSString *str = [userInfo objectForKey:@"FromWatchApp"];
+    NSLog(@"Recieve:%@",str);
+    
+    //Viewcontrollerを取得
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    if (window == nil) {
+        window = [[UIApplication sharedApplication].windows objectAtIndex:0];
+    }
+    RootViewController *viewController = window.rootViewController;
+    
+    
+    NSDictionary *applicationData;
+//    if([str isEqualToString:@"CAMERABOOT"]){
+//        //カメラ起動
+//        [viewController cameraBoot];
+//        if(viewController.cameraView){
+//            applicationData = @{@"FromParentApp":@"CAMERAOPENED"};
+//        }
+//        //        else{
+//        //            applicationData = @{@"FromParentApp":@"CAMERACLOSED"};
+//        //        }
+//    }else if([str isEqualToString:@"CAMERASHUTTER"]){
+//        //シャッター
+//        [viewController shutter];
+//        applicationData = @{@"FromParentApp":@"CAMERASHUTTER"};
+//    }
+    
+    reply(applicationData);
 }
 
 
