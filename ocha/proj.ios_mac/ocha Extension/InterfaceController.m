@@ -18,6 +18,13 @@
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
 
+    if ([WCSession isSupported]) {
+        WCSession *session = [WCSession defaultSession];
+        session.delegate = self;
+        [session activateSession];
+    }
+    
+    
     // Configure interface objects here.
 }
 
@@ -34,28 +41,27 @@
 -(IBAction)submitNotification:(id)sender{
     NSLog(@"通知送る");
     
-    
-    // NSDictionary生成　Key:"counterValue" Value（値）:counterString(counterカウント)
-    NSDictionary *applicationData = @{@"FromWatchApp":@"CAMERABOOT"};
-    
-//    // 一つ目の引数に渡したいデータを入れればOK
-//    [WKInterfaceController openParentApplication:applicationData reply:^(NSDictionary *replyInfo, NSError *error) {
-//        NSLog(@"%@",[replyInfo objectForKey:@"FromParentApp"]);
-//        
-//        //親Appからの返信
-//        if([(NSString*)[replyInfo objectForKey:@"FromParentApp"]isEqualToString:@"CAMERAOPENED"]){
-//            //音声入力画面の起動
-//            //[self callMorphingCode];
-//        }
-//        //        else if([(NSString*)[replyInfo objectForKey:@"FromParentApp"]isEqualToString:@"CAMERACLOSED"]){
-//        //
-//        //        }
-//    }];
-    
-
-    // 送信側
     NSDictionary *applicationDict = @{@"hoge" : @"huga"};
     [[WCSession defaultSession] updateApplicationContext:applicationDict error:nil];
+    
+    
+    if ([[WCSession defaultSession] isReachable]) {
+        [[WCSession defaultSession] sendMessage:applicationDict
+                                   replyHandler:^(NSDictionary *replyHandler) {
+                                       // do something
+                                       NSLog(@"送った");
+                                   }
+                                   errorHandler:^(NSError *error) {
+                                       // do something
+                                       NSLog(@"送れなかった・・・orz");
+                                   }
+         ];
+    }else{
+        NSLog(@"つながってないよ");
+    }
+    
+    
+    
     
 }
 

@@ -27,6 +27,7 @@
 #import "cocos2d.h"
 #import "platform/ios/CCEAGLView-ios.h"
 
+
 @implementation RootViewController
 
 /*
@@ -65,9 +66,11 @@
 #endif
 }
 
+
 - (BOOL) shouldAutorotate {
     return YES;
 }
+
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];

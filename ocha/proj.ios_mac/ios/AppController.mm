@@ -27,6 +27,7 @@
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
+#import "NativeInterface_iOS.h"
 
 
 @implementation AppController
@@ -37,8 +38,20 @@
 // cocos2d application instance
 static AppDelegate s_sharedApplication;
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
 
+    // Do any additional setup after loading the view, typically from a nib.
+    NSDictionary *applicationDict = @{@"hoge" : @"huga"};
+    
+    if ([WCSession isSupported]) {
+        NSLog(@"通った？");
+        WCSession *session = [WCSession defaultSession];
+        session.delegate = self;
+        [session activateSession];
+    }
+    
+    
     cocos2d::Application *app = cocos2d::Application::getInstance();
     app->initGLContextAttrs();
     cocos2d::GLViewImpl::convertAttrs();
@@ -146,35 +159,19 @@ static AppDelegate s_sharedApplication;
     [super dealloc];
 }
 
--(void)application:(UIApplication *)application handleWatchKitExtensionRequest:(NSDictionary *)userInfo reply:(void (^)(NSDictionary *))reply{
-    NSString *str = [userInfo objectForKey:@"FromWatchApp"];
-    NSLog(@"Recieve:%@",str);
+
+// Interactive Message
+- (void)session:(nonnull WCSession *)session didReceiveMessage:(nonnull NSDictionary<NSString *,id> *)message replyHandler:(nonnull void (^)(NSDictionary<NSString *,id> * __nonnull))replyHandler
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog( [NSString stringWithFormat:@"%s: %@", __func__, message]);
+        [NativeInterface_iOS getTextFromWatch: [message objectForKey:@"hoge"]];
+
+    });
     
-    //Viewcontrollerを取得
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    if (window == nil) {
-        window = [[UIApplication sharedApplication].windows objectAtIndex:0];
-    }
-    RootViewController *viewController = window.rootViewController;
+    replyHandler(@{@"reply" : @"OK"});
     
-    
-    NSDictionary *applicationData;
-//    if([str isEqualToString:@"CAMERABOOT"]){
-//        //カメラ起動
-//        [viewController cameraBoot];
-//        if(viewController.cameraView){
-//            applicationData = @{@"FromParentApp":@"CAMERAOPENED"};
-//        }
-//        //        else{
-//        //            applicationData = @{@"FromParentApp":@"CAMERACLOSED"};
-//        //        }
-//    }else if([str isEqualToString:@"CAMERASHUTTER"]){
-//        //シャッター
-//        [viewController shutter];
-//        applicationData = @{@"FromParentApp":@"CAMERASHUTTER"};
-//    }
-    
-    reply(applicationData);
+
 }
 
 
