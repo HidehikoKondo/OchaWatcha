@@ -96,7 +96,7 @@
 //ボタンをタップで通知
 -(IBAction)submitNotification:(id)sender{
     NSLog(@"通知送る");
-    [self submit:@"通知を送る"];
+    [self submit:@"SWING"];
 }
 
 
