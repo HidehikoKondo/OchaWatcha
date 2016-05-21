@@ -30,15 +30,26 @@
 
 @implementation RootViewController
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+
+
+// The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         // Custom initialization
+
+        {
+            [super viewDidLoad];
+
+            locationManager = [[CLLocationManager alloc] init];
+            locationManager.headingFilter = kCLHeadingFilterNone;
+            locationManager.delegate = self;
+            [locationManager startUpdatingHeading];
+        }
     }
     return self;
 }
-*/
+
 
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -46,13 +57,14 @@
 }
 */
 
+
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewDidLoad
+{
 }
-
 */
+
 // Override to allow orientations other than the default portrait orientation.
 // This method is deprecated on ios6
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -113,5 +125,15 @@
     [super dealloc];
 }
 
+
+
+- (void)locationManager:(CLLocationManager *)manager
+       didUpdateHeading:(CLHeading *)heading {
+    NSLog([NSString stringWithFormat:@"trueHeading    : %f", heading.trueHeading]);
+    NSLog([NSString stringWithFormat:@"magneticHeading: %f", heading.magneticHeading]);
+
+    _compasslocation.x = heading.trueHeading;
+    _compasslocation.y = heading.magneticHeading;
+}
 
 @end

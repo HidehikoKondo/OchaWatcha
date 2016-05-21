@@ -33,4 +33,11 @@ namespace cocos2dExt
     {
         [NativeInterface_iOS putTextToWatch:text];
     }
+
+    //コンパス
+    cocos2d::Point NativeInterface::getCompass()
+    {
+        auto pos = [NativeInterface_iOS getCompass];
+        return pos;
+    }
 };

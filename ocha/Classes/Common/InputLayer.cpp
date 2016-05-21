@@ -49,6 +49,8 @@ void InputLayer::onEnter()
 
     if (auto listener = EventListenerAcceleration::create(CC_CALLBACK_2(InputLayer::onAcceleration, this)))
     {
+        //MARK: 傾きセンサー使用
+        Device::setAccelerometerEnabled(true);
         this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
     }
 }

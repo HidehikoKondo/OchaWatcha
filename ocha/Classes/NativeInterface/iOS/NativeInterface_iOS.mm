@@ -10,6 +10,7 @@
 #include "NativeInterface.h"
 
 #import "AppController.h"
+#import "RootViewController.h"
 
 
 @interface NativeInterface_iOS()
@@ -24,6 +25,7 @@
     cocos2dExt::NativeInterface::getTextFromWatch([text UTF8String]);
 }
 
+
 //Watchへ文字を送る
 + (void) putTextToWatch:(std::string) text
 {
@@ -32,11 +34,26 @@
     {
         NSLog(@"--- cocos -> appcontroller ---");
         NSLog([NSString stringWithUTF8String:text.c_str()]);
-        
+
         //TODO:
         [appController sendMessageForWatch:[NSString stringWithUTF8String:text.c_str()]];
     }
 }
 
 
+//コンパス
++ (cocos2d::Point) getCompass
+{
+    cocos2d::Point pos = cocos2d::Point::ZERO;
+
+    //
+    RootViewController * rootviewController = (RootViewController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    if (rootviewController)
+    {
+        pos.x = rootviewController.compasslocation.x;
+        pos.y = rootviewController.compasslocation.y;
+    }
+
+    return pos;
+}
 @end

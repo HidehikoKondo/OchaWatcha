@@ -29,6 +29,9 @@ namespace cocos2dExt
             NativeInterface::putTextToWatch(cocos2d::StringUtils::toString(number));
         }
         static void putTextToWatch(std::string text);
+
+        //コンパス
+        static cocos2d::Point getCompass();
     };
 };
 #endif
