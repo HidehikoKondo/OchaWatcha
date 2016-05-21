@@ -28,4 +28,7 @@
 //コンパス
 + (cocos2d::Point) getCompass;
 
+//読み上げてるメソッド
++ (void)speech:(NSString *)message;
+
 @end
