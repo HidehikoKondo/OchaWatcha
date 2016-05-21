@@ -3,18 +3,22 @@
 
 #include "cocos2d.h"
 
+
 class HelloWorld : public cocos2d::Layer
 {
 public:
     static cocos2d::Scene* createScene();
 
-    virtual bool init();
-    
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
-    
+public:
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+
+protected:
+    virtual bool init() override;
+
+protected:
+    virtual void onEnter() override;
+    virtual void onExit() override;
 };
 
-#endif // __HELLOWORLD_SCENE_H__
+#endif

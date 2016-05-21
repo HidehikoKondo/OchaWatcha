@@ -70,6 +70,8 @@
 		6A3914EA1CF0405900E211F0 /* ComplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3914E91CF0405900E211F0 /* ComplicationController.m */; };
 		6A3914EC1CF0405900E211F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A3914EB1CF0405900E211F0 /* Assets.xcassets */; };
 		6A3914F01CF0405900E211F0 /* ocha.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6A3914C91CF0405800E211F0 /* ocha.app */; };
+		6A39150A1CF048CC00E211F0 /* NativeInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3915041CF048CC00E211F0 /* NativeInterface.mm */; };
+		6A39150B1CF048CC00E211F0 /* NativeInterface_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3915061CF048CC00E211F0 /* NativeInterface_iOS.mm */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -229,6 +231,10 @@
 		6A3914E91CF0405900E211F0 /* ComplicationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComplicationController.m; sourceTree = "<group>"; };
 		6A3914EB1CF0405900E211F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A3914ED1CF0405900E211F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A3915041CF048CC00E211F0 /* NativeInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NativeInterface.mm; sourceTree = "<group>"; };
+		6A3915051CF048CC00E211F0 /* NativeInterface_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeInterface_iOS.h; sourceTree = "<group>"; };
+		6A3915061CF048CC00E211F0 /* NativeInterface_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NativeInterface_iOS.mm; sourceTree = "<group>"; };
+		6A3915071CF048CC00E211F0 /* NativeInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeInterface.h; sourceTree = "<group>"; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -387,6 +393,7 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6A3914FE1CF048CC00E211F0 /* NativeInterface */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
@@ -479,6 +486,25 @@
 				6A3914DB1CF0405900E211F0 /* PushNotificationPayload.apns */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6A3914FE1CF048CC00E211F0 /* NativeInterface */ = {
+			isa = PBXGroup;
+			children = (
+				6A3915031CF048CC00E211F0 /* iOS */,
+				6A3915071CF048CC00E211F0 /* NativeInterface.h */,
+			);
+			path = NativeInterface;
+			sourceTree = "<group>";
+		};
+		6A3915031CF048CC00E211F0 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6A3915041CF048CC00E211F0 /* NativeInterface.mm */,
+				6A3915051CF048CC00E211F0 /* NativeInterface_iOS.h */,
+				6A3915061CF048CC00E211F0 /* NativeInterface_iOS.mm */,
+			);
+			path = iOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -693,10 +719,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A39150A1CF048CC00E211F0 /* NativeInterface.mm in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				6A39150B1CF048CC00E211F0 /* NativeInterface_iOS.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1129,6 +1157,7 @@
 				6A3914F31CF0405900E211F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		6A3914F51CF0405900E211F0 /* Build configuration list for PBXNativeTarget "ocha" */ = {
 			isa = XCConfigurationList;
@@ -1137,6 +1166,7 @@
 				6A3914F71CF0405900E211F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ocha" */ = {
 			isa = XCConfigurationList;
