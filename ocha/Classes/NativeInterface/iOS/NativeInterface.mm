@@ -28,4 +28,9 @@ namespace cocos2dExt
 
         cocos2d::Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
     }
+
+    void NativeInterface::putTextToWatch(std::string text)
+    {
+        
+    }
 };

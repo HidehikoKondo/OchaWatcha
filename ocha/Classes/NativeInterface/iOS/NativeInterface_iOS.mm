@@ -9,6 +9,8 @@
 #include "NativeInterface_iOS.h"
 #include "NativeInterface.h"
 
+#import "AppController.h"
+
 
 @interface NativeInterface_iOS()
 @end
@@ -21,5 +23,17 @@
 {
     cocos2dExt::NativeInterface::getTextFromWatch([text UTF8String]);
 }
+
+//Watchへ文字を送る
++ (void) putTextToWatch:(std::string) text
+{
+    AppController *appController = (AppController *)[UIApplication sharedApplication].delegate;
+    if (appController)
+    {
+        //TODO:
+        //[appController sendMessageForWatch:[NSString stringWithUTF8String:text]];
+    }
+}
+
 
 @end

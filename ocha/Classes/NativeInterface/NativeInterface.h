@@ -23,6 +23,12 @@ namespace cocos2dExt
 
         //Watchから文字を受け取る
         static void getTextFromWatch(std::string text);
+
+        //Watchへ文字を送る
+        static void putTextToWatch(int number) {
+            NativeInterface::putTextToWatch(cocos2d::StringUtils::toString(number));
+        }
+        static void putTextToWatch(std::string text);
     };
 };
 #endif
