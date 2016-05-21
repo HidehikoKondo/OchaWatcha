@@ -80,9 +80,10 @@
 		6A3915321CF062E200E211F0 /* NativeInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A39152E1CF062E200E211F0 /* NativeInterface.mm */; };
 		6A3915331CF062E200E211F0 /* NativeInterface_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3915301CF062E200E211F0 /* NativeInterface_iOS.mm */; };
 		6A3915361CF06DD100E211F0 /* InputLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A3915341CF06DD100E211F0 /* InputLayer.cpp */; };
+		6A39153E1CF09C7600E211F0 /* CommonFunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A39153C1CF09C7600E211F0 /* CommonFunction.cpp */; };
+		6AB8F9AE1CF0C81300ED6AC3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB8F9AD1CF0C81300ED6AC3 /* CoreLocation.framework */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		9EEF82841CF060F900F40C29 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EEF82831CF060F900F40C29 /* WatchConnectivity.framework */; };
-		9EF1E1CE1CF0CAEB0049BBC4 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF1E1CD1CF0CAEB0049BBC4 /* CoreMotion.framework */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -261,9 +262,12 @@
 		6A3915311CF062E200E211F0 /* NativeInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeInterface.h; sourceTree = "<group>"; };
 		6A3915341CF06DD100E211F0 /* InputLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InputLayer.cpp; path = Common/InputLayer.cpp; sourceTree = "<group>"; };
 		6A3915351CF06DD100E211F0 /* InputLayer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = InputLayer.hpp; path = Common/InputLayer.hpp; sourceTree = "<group>"; };
+		6A39153B1CF099EC00E211F0 /* PrivateConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateConfig.h; sourceTree = "<group>"; };
+		6A39153C1CF09C7600E211F0 /* CommonFunction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CommonFunction.cpp; path = Common/CommonFunction.cpp; sourceTree = "<group>"; };
+		6A39153D1CF09C7600E211F0 /* CommonFunction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CommonFunction.hpp; path = Common/CommonFunction.hpp; sourceTree = "<group>"; };
+		6AB8F9AD1CF0C81300ED6AC3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9EEF82831CF060F900F40C29 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/WatchConnectivity.framework; sourceTree = DEVELOPER_DIR; };
-		9EF1E1CD1CF0CAEB0049BBC4 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -280,7 +284,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9EF1E1CE1CF0CAEB0049BBC4 /* CoreMotion.framework in Frameworks */,
+				6AB8F9AE1CF0C81300ED6AC3 /* CoreLocation.framework in Frameworks */,
 				9EEF82841CF060F900F40C29 /* WatchConnectivity.framework in Frameworks */,
 				6A3914C31CF0402800E211F0 /* WatchKit.framework in Frameworks */,
 				ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */,
@@ -383,7 +387,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9EF1E1CD1CF0CAEB0049BBC4 /* CoreMotion.framework */,
+				6AB8F9AD1CF0C81300ED6AC3 /* CoreLocation.framework */,
 				9EEF82831CF060F900F40C29 /* WatchConnectivity.framework */,
 				6A3914C21CF0402800E211F0 /* WatchKit.framework */,
 				ED545A7D1B68A1FA00C3958E /* libiconv.dylib */,
@@ -434,6 +438,7 @@
 				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
 				6A39150D1CF0600100E211F0 /* TitleLayer.cpp */,
 				6A39150E1CF0600100E211F0 /* TitleLayer.hpp */,
+				6A39153B1CF099EC00E211F0 /* PrivateConfig.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -573,6 +578,8 @@
 		6A3915371CF06DD600E211F0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6A39153C1CF09C7600E211F0 /* CommonFunction.cpp */,
+				6A39153D1CF09C7600E211F0 /* CommonFunction.hpp */,
 				6A3915341CF06DD100E211F0 /* InputLayer.cpp */,
 				6A3915351CF06DD100E211F0 /* InputLayer.hpp */,
 			);
@@ -798,6 +805,7 @@
 			files = (
 				6A39151B1CF0608600E211F0 /* Step2Layer.cpp in Sources */,
 				6A3915331CF062E200E211F0 /* NativeInterface_iOS.mm in Sources */,
+				6A39153E1CF09C7600E211F0 /* CommonFunction.cpp in Sources */,
 				6A3915271CF0611700E211F0 /* Step5Layer.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				6A3915171CF0604800E211F0 /* Step1Layer.cpp in Sources */,
