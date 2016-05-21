@@ -22,13 +22,19 @@ namespace cocos2dExt
 //        virtual ~NativeInterface() {};
 
         //Watchから文字を受け取る
-        static void getTextFromWatch(std::string text);
+        static void getTextFromWatch(const std::string &text);
 
         //Watchへ文字を送る
         static void putTextToWatch(int number) {
             NativeInterface::putTextToWatch(cocos2d::StringUtils::toString(number));
         }
-        static void putTextToWatch(std::string text);
+        static void putTextToWatch(const std::string &text);
+
+        //コンパス
+        static cocos2d::Point getCompass();
+
+        //読み上げてるメソッド
+        static void speech(const std::string &message);
     };
 };
 #endif

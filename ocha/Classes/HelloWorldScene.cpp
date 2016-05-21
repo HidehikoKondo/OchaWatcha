@@ -85,6 +85,26 @@ bool HelloWorld::init()
     }
 
 
+    //Put Number 1
+    if (auto label = Label::createWithSystemFont("speech test", "", 32.0f))
+    {
+        auto callback = [](Ref * pSender) {
+            cocos2dExt::NativeInterface::speech("ちょっとだけよ");
+        };
+
+        if (auto item = MenuItemLabel::create(label, callback))
+        {
+            if (auto menu = Menu::createWithItem(item))
+            {
+                const auto pos = Point(visibleSize.width * 0.5f, visibleSize.height * 0.25f);
+                menu->setPosition(pos);
+
+                this->addChild(menu);
+            }
+        }
+    }
+
+
 //    /////////////////////////////
 //    // 3. add your codes below...
     if (auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24))

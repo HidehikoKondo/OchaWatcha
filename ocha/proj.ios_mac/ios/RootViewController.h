@@ -25,10 +25,18 @@
 
 #import <UIKit/UIKit.h>
 
+#import <CoreLocation/CoreLocation.h>
 
-@interface RootViewController : UIViewController {
 
+@interface RootViewController : UIViewController <CLLocationManagerDelegate>
+{
+    CLLocationManager *locationManager;
+    //CGPoint locaion;
 }
+
 - (BOOL) prefersStatusBarHidden;
+
+
+@property (readonly) CGPoint compasslocation;
 
 @end

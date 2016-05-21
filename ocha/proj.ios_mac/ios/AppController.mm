@@ -28,6 +28,7 @@
 #import "AppDelegate.h"
 #import "RootViewController.h"
 #import "NativeInterface_iOS.h"
+#import "AVFoundation/AVFoundation.h"
 
 
 @implementation AppController
@@ -41,6 +42,9 @@ static AppDelegate s_sharedApplication;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
 
+    
+
+    
     // Do any additional setup after loading the view, typically from a nib.
     NSDictionary *applicationDict = @{@"hoge" : @"huga"};
     
@@ -172,6 +176,9 @@ static AppDelegate s_sharedApplication;
     
     replyHandler(@{@"reply" : @"OK"});
     
+    //[self speech:@"寝たら死ぬぞ"];
+
+    
     //[self sendMessageForWatch: @"123"];
 }
 
@@ -201,5 +208,14 @@ static AppDelegate s_sharedApplication;
     }
 }
 
+
+//読み上げてるメソッド
+- (void)speech:(NSString *)message
+{
+    AVSpeechSynthesizer* speechSynthesizer = [[AVSpeechSynthesizer alloc] init];
+    NSString* speakingText = message;
+    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:speakingText];
+    [speechSynthesizer speakUtterance:utterance];
+}
 
 @end

@@ -3,11 +3,14 @@
 
 @class RootViewController;
 
-@interface AppController : NSObject <UIApplicationDelegate, WCSessionDelegate> {
+@interface AppController : NSObject <UIApplicationDelegate, WCSessionDelegate>
+{
     UIWindow *window;
 }
 
 @property(nonatomic, readonly) RootViewController* viewController;
+
+- (void)speech:(NSString *)message;
 
 @end
 
