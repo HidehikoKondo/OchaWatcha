@@ -270,8 +270,8 @@ void OchaLayer::update(float delta)
             label->setString(text);
         }
 
-        //3回転以上
-        if ((this->_rotateStep - this->_rotateFirstStep) >= (360.0f * 3.0f))
+        //3回転以上 ... (微調整込み)
+        if ((this->_rotateStep - this->_rotateFirstStep) >= ((360.0f * 3.0f) - 30.0f))
         {
             //次のステップへ
             this->step5();
