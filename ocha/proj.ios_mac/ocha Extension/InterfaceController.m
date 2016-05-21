@@ -109,7 +109,7 @@
         [[WCSession defaultSession] sendMessage:applicationDict
                                    replyHandler:^(NSDictionary *replyHandler) {
                                        // do something
-                                       NSLog(@"送った");
+                                       NSLog(@"送った/ %@",message);
                                    }
                                    errorHandler:^(NSError *error) {
                                        // do something
@@ -132,9 +132,41 @@
         NSLog([NSString stringWithFormat:@"----   app -> watch SUCCESS!!!!   ----%@", [message objectForKey:@"message"]]);
         
         [_messageLabel setText:[message objectForKey:@"message"]];
+        
+        
+        // ５番だったら音声入力モードにする
+        if([[message objectForKey:@"message"] isEqualToString:@"1"]){
+            //音声入力モードにする
+            NSArray* suggestions = @[@"こんにちは",@"ハロー",@"グーテンモルゲン"];
+            [self presentTextInputControllerWithSuggestions:nil
+                                           allowedInputMode:WKTextInputModePlain
+                                                 completion:^(NSArray *results) {
+                                                     //音声入力
+                                                     if (results && results.count > 0) {
+                                                         id aResult = [results objectAtIndex:0];
+                                                         NSLog(@"音声入力：%@",(NSString*)aResult);
+                                                         
+                                                         if(![aResult isEqualToString:@""]){
+                                                             //実演用になんか言えば良しとする　ほんとはどうぞって言うようにしたい
+                                                             [_messageLabel setText:@"どうぞ"];
+                                                             [self submit:@"DOUZO"];
+
+                                                         }else{
+                                                             [_messageLabel setText:@"どうぞと言ってください"];
+                                                         }
+                                                     }
+                                                     else {
+                                                         // 文字が選択されていません。
+                                                     }
+                                                 }];
+
+        }
+        
+        
     });
     
     replyHandler(@{@"reply" : @"OK"});
+    
 }
 
 

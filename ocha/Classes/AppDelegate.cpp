@@ -1,7 +1,12 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
 
+#include "Step4Layer.hpp"
+#include "OchaLayer.hpp"
+
+
 USING_NS_CC;
+
 
 static cocos2d::Size designResolutionSize = cocos2d::Size( 480,  320);
 static cocos2d::Size smallResolutionSize  = cocos2d::Size( 480,  320);
@@ -96,7 +101,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
+    auto scene = OchaLayer::createScene();
 
     // run
     director->runWithScene(scene);
