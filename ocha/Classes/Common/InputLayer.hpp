@@ -1,25 +1,25 @@
 //
-//  TitleLayer.hpp
+//  InputLayer.hpp
 //  ocha
 //
 //  Created by OhsakaTakashi on 2016/05/21.
 //
 //
 
-#ifndef TitleLayer_hpp
-#define TitleLayer_hpp
+#ifndef InputLayer_hpp
+#define InputLayer_hpp
 
 #include "cocos2d.h"
 
 
-class TitleLayer : public cocos2d::Layer
+class InputLayer : public cocos2d::Layer
 {
 protected:
-    TitleLayer();
-    virtual ~TitleLayer();
+    InputLayer();
+    virtual ~InputLayer();
 
 public:
-    CREATE_FUNC(TitleLayer);
+    CREATE_FUNC(InputLayer);
 
 protected:
     virtual bool init() override;

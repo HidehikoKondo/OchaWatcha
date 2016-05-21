@@ -79,6 +79,7 @@
 		6A39152A1CF0612C00E211F0 /* Step6Layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A3915281CF0612C00E211F0 /* Step6Layer.cpp */; };
 		6A3915321CF062E200E211F0 /* NativeInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A39152E1CF062E200E211F0 /* NativeInterface.mm */; };
 		6A3915331CF062E200E211F0 /* NativeInterface_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A3915301CF062E200E211F0 /* NativeInterface_iOS.mm */; };
+		6A3915361CF06DD100E211F0 /* InputLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A3915341CF06DD100E211F0 /* InputLayer.cpp */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -256,6 +257,8 @@
 		6A39152F1CF062E200E211F0 /* NativeInterface_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeInterface_iOS.h; sourceTree = "<group>"; };
 		6A3915301CF062E200E211F0 /* NativeInterface_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NativeInterface_iOS.mm; sourceTree = "<group>"; };
 		6A3915311CF062E200E211F0 /* NativeInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeInterface.h; sourceTree = "<group>"; };
+		6A3915341CF06DD100E211F0 /* InputLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InputLayer.cpp; path = Common/InputLayer.cpp; sourceTree = "<group>"; };
+		6A3915351CF06DD100E211F0 /* InputLayer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = InputLayer.hpp; path = Common/InputLayer.hpp; sourceTree = "<group>"; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -414,6 +417,7 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6A3915371CF06DD600E211F0 /* Common */,
 				6A39152B1CF062E200E211F0 /* NativeInterface */,
 				6A3915181CF0605200E211F0 /* Step */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
@@ -556,6 +560,15 @@
 				6A3915301CF062E200E211F0 /* NativeInterface_iOS.mm */,
 			);
 			path = iOS;
+			sourceTree = "<group>";
+		};
+		6A3915371CF06DD600E211F0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6A3915341CF06DD100E211F0 /* InputLayer.cpp */,
+				6A3915351CF06DD100E211F0 /* InputLayer.hpp */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -783,6 +796,7 @@
 				6A3915211CF060BF00E211F0 /* Step3Layer.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				6A3915361CF06DD100E211F0 /* InputLayer.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				6A39150F1CF0600100E211F0 /* TitleLayer.cpp in Sources */,
 				6A3915321CF062E200E211F0 /* NativeInterface.mm in Sources */,

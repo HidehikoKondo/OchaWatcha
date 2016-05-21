@@ -1,28 +1,28 @@
 //
-//  TitleLayer.cpp
+//  InputLayer.cpp
 //  ocha
 //
 //  Created by OhsakaTakashi on 2016/05/21.
 //
 //
 
-#include "TitleLayer.hpp"
+#include "InputLayer.hpp"
 
 
 USING_NS_CC;
 
 
 #pragma mark -
-TitleLayer::TitleLayer()
+InputLayer::InputLayer()
 {
 }
-TitleLayer::~TitleLayer()
+InputLayer::~InputLayer()
 {
 }
 
 
 #pragma mark -
-bool TitleLayer::init()
+bool InputLayer::init()
 {
     auto result = false;
 
@@ -41,12 +41,12 @@ bool TitleLayer::init()
 
 
 #pragma mark -
-void TitleLayer::onEnter()
+void InputLayer::onEnter()
 {
     Layer::onEnter();
 }
 
-void TitleLayer::onExit()
+void InputLayer::onExit()
 {
     Layer::onExit();
 }
