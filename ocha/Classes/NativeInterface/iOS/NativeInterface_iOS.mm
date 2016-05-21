@@ -46,7 +46,6 @@
 {
     cocos2d::Point pos = cocos2d::Point::ZERO;
 
-    //
     RootViewController * rootviewController = (RootViewController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     if (rootviewController)
     {
@@ -56,4 +55,15 @@
 
     return pos;
 }
+
+//読み上げてるメソッド
++ (void)speech:(NSString *)message
+{
+    AppController *appController = (AppController *)[UIApplication sharedApplication].delegate;
+    if (appController)
+    {
+        [appController speech:message];
+    }
+}
+
 @end

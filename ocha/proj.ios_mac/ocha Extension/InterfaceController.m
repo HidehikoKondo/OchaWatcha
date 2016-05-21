@@ -12,7 +12,7 @@
 @interface InterfaceController()
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *messageLabel;
 
-float xPos;
+//float xPos;
 
 @end
 
