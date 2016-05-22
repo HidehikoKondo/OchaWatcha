@@ -76,5 +76,6 @@ protected:
     void step5();
     void step6();
     void step7();
+    void step8();
 };
 #endif

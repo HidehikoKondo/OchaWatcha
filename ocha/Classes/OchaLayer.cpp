@@ -16,6 +16,8 @@
 
 #include "TitleLayer.hpp"
 
+#include "audio/include/SimpleAudioEngine.h"
+
 
 USING_NS_CC;
 
@@ -223,6 +225,7 @@ void OchaLayer::onEnter()
                     {
                         if (acc->y <= -0.9f)
                         {
+                            CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("drinking_a_hot_one2.mp3");
                             this->_accCheck2 = true;
                         }
                     }
@@ -509,6 +512,54 @@ void OchaLayer::step7()
         cocos2dExt::NativeInterface::speech("けっこうなお手前を頂戴しました。");
     };
 
+    auto action = Sequence::create(
+                                   CallFunc::create(func),
+                                   DelayTime::create(6.0f),
+
+                                   //自動で次のステップへ
+                                   CallFunc::create(CC_CALLBACK_0(OchaLayer::step8, this)),
+                                   nullptr);
+    if (action)
+    {
+        this->runAction(action);
+    }
+}
+
+
+void OchaLayer::step8()
+{
+    cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
+
+    auto func = [this]() {
+        if (auto sprite = Sprite::create("good.png"))
+        {
+            auto visibleRect = Rect::ZERO;
+            {
+                visibleRect.origin = Director::getInstance()->getVisibleOrigin();
+                visibleRect.size   = Director::getInstance()->getVisibleSize();
+            }
+
+            const auto pos = visibleRect.origin + Point(visibleRect.size.width * 0.8f,
+                                                        visibleRect.size.height * 0.8f);
+            const auto movePos = visibleRect.origin + Point(visibleRect.size.width * 0.6f,
+                                                            visibleRect.size.height * 0.6f);
+            sprite->setPosition(pos);
+
+            sprite->setScale(5.0f);
+
+            sprite->setOpacity(0);
+            this->addChild(sprite, 100);
+
+
+            auto action = Spawn::create(
+                                        ScaleTo::create(0.5f, 1.0f),
+                                        FadeTo::create(0.2f, 255),
+                                        MoveTo::create(0.5f, movePos),
+                                        nullptr);
+            sprite->runAction(action);
+        }
+    };
+
 
     auto end_func = [this]() {
         if (auto scene = TitleLayer::createScene())
@@ -519,7 +570,7 @@ void OchaLayer::step7()
 
     auto action = Sequence::create(
                                    CallFunc::create(func),
-                                   DelayTime::create(6.0f),
+                                   DelayTime::create(3.0f),
 
                                    //タイトルに戻る
                                    CallFunc::create(end_func),
@@ -574,6 +625,12 @@ void OchaLayer::swingAnimation(bool isSwing)
         moveHero();
     }
     isSwing = !isSwing;
+
+
+    if (isSwing)
+    {
+        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("shakashaka.mp3");
+    }
 }
 
 //----------------------------------------------------
