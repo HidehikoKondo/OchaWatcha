@@ -13,6 +13,6 @@
 #define EVENT_NAME__ACCELERATION        "Acceleration"
 #define EVENT_NAME__TEXTFROMWATCH       "TextFromWatch"
 
-#define SWING_COUNT (100)
+#define SWING_COUNT (50)
 
 #endif

@@ -142,7 +142,7 @@ bool OchaLayer::init()
         if (auto label = Label::createWithSystemFont("douzo", "", 32.0f))
         {
             auto callback = [this](Ref * pSender) {
-                if (this->getStepIndex() == 5)
+                if (this->getStepIndex() == 4)
                 {
                     cocos2dExt::NativeInterface::getTextFromWatch("DOUZO");
                 }
@@ -246,9 +246,9 @@ void OchaLayer::onEnter()
                 else if (message.compare("DOUZO") == 0)
                 {
                     //「どうぞ」
-                    if (this->getStepIndex() == 5)
+                    if (this->getStepIndex() == 4)
                     {
-                        this->step6();
+                        this->step5();
                     }
                 }
             }
@@ -293,7 +293,7 @@ void OchaLayer::onExit()
 void OchaLayer::update(float delta)
 {
     //水平回転チェック(方位)
-    if (this->getStepIndex() == 4)
+    if (this->getStepIndex() == 5)
     {
         //方位の取得
         auto pos = cocos2dExt::NativeInterface::getCompass();
@@ -312,11 +312,11 @@ void OchaLayer::update(float delta)
             label->setString(text);
         }
 
-        //3回転以上 ... (微調整込み)
-        if ((this->_rotateStep - this->_rotateFirstStep) >= ((360.0f * 3.0f) - 30.0f))
+        //反転してもらう
+        if ((fabsf(this->_rotateStep) - fabsf(this->_rotateFirstStep)) >= 180.0f)
         {
             //次のステップへ
-            this->step5();
+            this->step6();
         }
     }
 }
@@ -412,18 +412,10 @@ void OchaLayer::step3()
 
 void OchaLayer::step4()
 {
-    hero->removeFromParent();  //茶せん消去
-    isSwingStart = false;  //お茶たて終了
-    
-    //最初の方位を取得
-    this->_rotateStep       = cocos2dExt::NativeInterface::getCompass().x;
-    this->_rotateLastStep   = this->_rotateStep;
-    this->_rotateFirstStep  = this->_rotateStep;
-
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("お茶まわしぃぃの");
+        cocos2dExt::NativeInterface::speech("お茶渡しぃぃの");
     };
 
     auto action = Sequence::create(
@@ -442,10 +434,18 @@ void OchaLayer::step4()
 
 void OchaLayer::step5()
 {
+    hero->removeFromParent();  //茶せん消去
+    isSwingStart = false;  //お茶たて終了
+    
+    //最初の方位を取得
+    this->_rotateStep       = cocos2dExt::NativeInterface::getCompass().x;
+    this->_rotateLastStep   = this->_rotateStep;
+    this->_rotateFirstStep  = this->_rotateStep;
+
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("お茶渡しぃぃの");
+        cocos2dExt::NativeInterface::speech("お茶まわしぃぃの");
     };
 
     auto action = Sequence::create(
@@ -502,7 +502,7 @@ void OchaLayer::step7()
 
     auto action = Sequence::create(
                                    CallFunc::create(func),
-                                   DelayTime::create(10.0f),
+                                   DelayTime::create(6.0f),
 
                                    //タイトルに戻る
                                    CallFunc::create(end_func),
