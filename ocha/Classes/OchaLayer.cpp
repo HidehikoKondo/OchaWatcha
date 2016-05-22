@@ -364,7 +364,9 @@ void OchaLayer::step3()
                                    nullptr);
     if (action)
     {
-        this->runAction(action);
+        if(swingCnt >= 100){
+            this->runAction(action);
+        }
     }
 }
 
