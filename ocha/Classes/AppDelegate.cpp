@@ -119,6 +119,7 @@ bool AppDelegate::applicationDidFinishLaunching()
         simpleAudio->playBackgroundMusic("bgm.mp3", true);
 
         simpleAudio->preloadEffect("drinking_a_hot_one2.mp3");
+        simpleAudio->preloadEffect("drum-japanese2.mp3");
         simpleAudio->preloadEffect("shakashaka.mp3");
     }
 

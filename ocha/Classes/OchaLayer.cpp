@@ -22,6 +22,9 @@
 USING_NS_CC;
 
 
+//#define DEBUG_UI
+
+
 #pragma mark -
 OchaLayer::OchaLayer()
 : _stepIndex(0)
@@ -105,81 +108,82 @@ bool OchaLayer::init()
 
 
 
-//        //DEBUG 1
-//        if (auto label = Label::createWithSystemFont("debug_label_guigui", "", 16.0f))
-//        {
-//            label->setName("debug_label_guigui");
-//
-//            const auto pos = Point(visibleRect.getMinX(), visibleRect.getMaxY() - 10.0f);
-//            label->setPosition(pos);
-//
-//            label->setAlignment(TextHAlignment::LEFT, TextVAlignment::CENTER);
-//            label->setAnchorPoint(Point::ANCHOR_MIDDLE_LEFT);
-//
-//            this->addChild(label);
-//        }
-//
-//        //DEBUG 2
-//        if (auto label = Label::createWithSystemFont("debug_label_guru x 2", "", 16.0f))
-//        {
-//            label->setName("debug_label_guru x 2");
-//
-//            const auto pos = Point(visibleRect.getMinX(), visibleRect.getMaxY() - 30.0f);
-//            label->setPosition(pos);
-//
-//            label->setAlignment(TextHAlignment::LEFT, TextVAlignment::CENTER);
-//            label->setAnchorPoint(Point::ANCHOR_MIDDLE_LEFT);
-//
-//            this->addChild(label);
-//        }
-//
-//
-//        //DEBUG 3 (仮ボタン)
-//        if (auto label = Label::createWithSystemFont("swing", "", 32.0f))
-//        {
-//            auto callback = [this](Ref * pSender) {
-//                if (this->getStepIndex() == 3)
-//                {
-//                    cocos2dExt::NativeInterface::getTextFromWatch("SWING");
-//                }
-//            };
-//
-//            if (auto item = MenuItemLabel::create(label, callback))
-//            {
-//                if (auto menu = Menu::createWithItem(item))
-//                {
-//                    const auto pos = visibleRect.origin + Point(visibleRect.size.width  * 0.1f,
-//                                                                visibleRect.size.height * 0.5f);
-//                    menu->setPosition(pos);
-//
-//                    this->addChild(menu);
-//                }
-//            }
-//        }
-//
-//        //DEBUG 4 (仮ボタン)
-//        if (auto label = Label::createWithSystemFont("douzo", "", 32.0f))
-//        {
-//            auto callback = [this](Ref * pSender) {
-//                if (this->getStepIndex() == 4)
-//                {
-//                    cocos2dExt::NativeInterface::getTextFromWatch("DOUZO");
-//                }
-//            };
-//
-//            if (auto item = MenuItemLabel::create(label, callback))
-//            {
-//                if (auto menu = Menu::createWithItem(item))
-//                {
-//                    const auto pos = visibleRect.origin + Point(visibleRect.size.width * 0.1f,
-//                                                                visibleRect.size.height * 0.25f);
-//                    menu->setPosition(pos);
-//
-//                    this->addChild(menu);
-//                }
-//            }
-//        }
-//
+#ifdef DEBUG_UI
+        //DEBUG 1
+        if (auto label = Label::createWithSystemFont("debug_label_guigui", "", 16.0f))
+        {
+            label->setName("debug_label_guigui");
+
+            const auto pos = Point(visibleRect.getMinX(), visibleRect.getMaxY() - 10.0f);
+            label->setPosition(pos);
+
+            label->setAlignment(TextHAlignment::LEFT, TextVAlignment::CENTER);
+            label->setAnchorPoint(Point::ANCHOR_MIDDLE_LEFT);
+
+            this->addChild(label);
+        }
+
+        //DEBUG 2
+        if (auto label = Label::createWithSystemFont("debug_label_guru x 2", "", 16.0f))
+        {
+            label->setName("debug_label_guru x 2");
+
+            const auto pos = Point(visibleRect.getMinX(), visibleRect.getMaxY() - 30.0f);
+            label->setPosition(pos);
+
+            label->setAlignment(TextHAlignment::LEFT, TextVAlignment::CENTER);
+            label->setAnchorPoint(Point::ANCHOR_MIDDLE_LEFT);
+
+            this->addChild(label);
+        }
+
+
+        //DEBUG 3 (仮ボタン)
+        if (auto label = Label::createWithSystemFont("swing", "", 32.0f))
+        {
+            auto callback = [this](Ref * pSender) {
+                if (this->getStepIndex() == 3)
+                {
+                    cocos2dExt::NativeInterface::getTextFromWatch("SWING");
+                }
+            };
+
+            if (auto item = MenuItemLabel::create(label, callback))
+            {
+                if (auto menu = Menu::createWithItem(item))
+                {
+                    const auto pos = visibleRect.origin + Point(visibleRect.size.width  * 0.1f,
+                                                                visibleRect.size.height * 0.5f);
+                    menu->setPosition(pos);
+
+                    this->addChild(menu);
+                }
+            }
+        }
+
+        //DEBUG 4 (仮ボタン)
+        if (auto label = Label::createWithSystemFont("douzo", "", 32.0f))
+        {
+            auto callback = [this](Ref * pSender) {
+                if (this->getStepIndex() == 4)
+                {
+                    cocos2dExt::NativeInterface::getTextFromWatch("DOUZO");
+                }
+            };
+
+            if (auto item = MenuItemLabel::create(label, callback))
+            {
+                if (auto menu = Menu::createWithItem(item))
+                {
+                    const auto pos = visibleRect.origin + Point(visibleRect.size.width * 0.1f,
+                                                                visibleRect.size.height * 0.25f);
+                    menu->setPosition(pos);
+
+                    this->addChild(menu);
+                }
+            }
+        }
+#endif
 
         result = true;
     } while (0);
@@ -611,9 +615,12 @@ void OchaLayer::step8()
         }
     };
 
+
     auto action = Sequence::create(
                                    CallFunc::create(func),
-                                   DelayTime::create(3.0f),
+                                   DelayTime::create(0.7f),
+                                   CallFunc::create([](){ CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("drum-japanese2.mp3"); }),
+                                   DelayTime::create(2.3f),
 
                                    //タイトルに戻る
                                    CallFunc::create(end_func),
@@ -701,7 +708,7 @@ void OchaLayer::moveHero()
         }
     };
 
-    auto rotate = RotateBy::create(0.02f, 20.0f);
+    auto rotate = RotateBy::create(0.05f, 20.0f);
     auto seq = Sequence::create(rotate,
                                 rotate->reverse(),
                                 rotate->reverse(),
