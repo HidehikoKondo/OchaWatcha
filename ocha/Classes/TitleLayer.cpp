@@ -75,6 +75,12 @@ bool TitleLayer::init()
 
         if (auto sprite = Sprite::create("title/title.png"))
         {
+            const auto size = sprite->getContentSize();
+
+            const auto rate = visibleRect.size.width  / size.width;
+            sprite->setScale(rate);
+
+
             auto pos = Point::ZERO;
             pos = Point(visibleRect.getMidX(), visibleRect.getMidY());
 
