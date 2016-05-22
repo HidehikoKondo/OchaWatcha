@@ -676,16 +676,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				TargetAttributes = {
-					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = UNFXRZ4H42;
-					};
 					6A3914C81CF0405800E211F0 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = UNFXRZ4H42;
 					};
 					6A3914D41CF0405900E211F0 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = UNFXRZ4H42;
 					};
 				};
 			};
