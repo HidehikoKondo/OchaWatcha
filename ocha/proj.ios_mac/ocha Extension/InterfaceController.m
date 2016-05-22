@@ -134,8 +134,8 @@
         [_messageLabel setText:[message objectForKey:@"message"]];
         
         
-        // ５番だったら音声入力モードにする
-        if([[message objectForKey:@"message"] isEqualToString:@"5"]){
+        // 4番だったら音声入力モードにする
+        if([[message objectForKey:@"message"] isEqualToString:@"4"]){
             //音声入力モードにする
             NSArray* suggestions = @[@"こんにちは",@"ハロー",@"グーテンモルゲン"];
             [self presentTextInputControllerWithSuggestions:nil
