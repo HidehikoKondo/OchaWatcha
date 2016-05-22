@@ -14,6 +14,8 @@
 #include "NativeInterface.h"
 #include "InputLayer.hpp"
 
+#include "TitleLayer.hpp"
+
 
 USING_NS_CC;
 
@@ -26,6 +28,10 @@ OchaLayer::OchaLayer()
 , _rotateLastStep(0.0f)
 , _accCheck(false)
 , _accCheck2(false)
+
+, swingCnt(0)
+, isSwing(false)
+, isSwingStart(false)
 {
 }
 OchaLayer::~OchaLayer()
@@ -110,6 +116,29 @@ bool OchaLayer::init()
 
 
         //DEBUG 3 (仮ボタン)
+        if (auto label = Label::createWithSystemFont("swing", "", 32.0f))
+        {
+            auto callback = [this](Ref * pSender) {
+                if (this->getStepIndex() == 3)
+                {
+                    cocos2dExt::NativeInterface::getTextFromWatch("SWING");
+                }
+            };
+
+            if (auto item = MenuItemLabel::create(label, callback))
+            {
+                if (auto menu = Menu::createWithItem(item))
+                {
+                    const auto pos = visibleRect.origin + Point(visibleRect.size.width  * 0.1f,
+                                                                visibleRect.size.height * 0.5f);
+                    menu->setPosition(pos);
+
+                    this->addChild(menu);
+                }
+            }
+        }
+
+        //DEBUG 4 (仮ボタン)
         if (auto label = Label::createWithSystemFont("douzo", "", 32.0f))
         {
             auto callback = [this](Ref * pSender) {
@@ -295,10 +324,14 @@ void OchaLayer::step1()
         this->_rotateStep       = 0.0f;
         this->_rotateFirstStep  = 0.0f;
         this->_rotateLastStep   = 0.0f;
+
+        this->_stepIndex        = 0;
+
+        this->swingCnt  = 0;
     }
 
 
-    cocos2dExt::NativeInterface::putTextToWatch(this->_stepIndex++);
+    cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
         cocos2dExt::NativeInterface::speech("こな入れてぇぇぇの");
@@ -320,7 +353,7 @@ void OchaLayer::step1()
 
 void OchaLayer::step2()
 {
-    cocos2dExt::NativeInterface::putTextToWatch(this->_stepIndex++);
+    cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
         cocos2dExt::NativeInterface::speech("お湯入れてぇぇぇの");
@@ -349,7 +382,7 @@ void OchaLayer::step3()
     this->addChild(hero, 1);
     isSwingStart = true;    //お茶たて開始
     
-    cocos2dExt::NativeInterface::putTextToWatch(this->_stepIndex++);
+    cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
         cocos2dExt::NativeInterface::speech("お茶立ててぇぇぇの");
@@ -360,7 +393,7 @@ void OchaLayer::step3()
                                    DelayTime::create(2.0f),
 
                                    //自動で次のステップへ
-                                   CallFunc::create(CC_CALLBACK_0(OchaLayer::step4, this)),
+                                   //CallFunc::create(CC_CALLBACK_0(OchaLayer::step4, this)),
                                    nullptr);
     if (action)
     {
@@ -381,7 +414,7 @@ void OchaLayer::step4()
     this->_rotateLastStep   = this->_rotateStep;
     this->_rotateFirstStep  = this->_rotateStep;
 
-    cocos2dExt::NativeInterface::putTextToWatch(this->_stepIndex++);
+    cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
         cocos2dExt::NativeInterface::speech("お茶まわしぃぃの");
@@ -403,7 +436,7 @@ void OchaLayer::step4()
 
 void OchaLayer::step5()
 {
-    cocos2dExt::NativeInterface::putTextToWatch(this->_stepIndex++);
+    cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
         cocos2dExt::NativeInterface::speech("お茶渡しぃぃの");
@@ -425,7 +458,7 @@ void OchaLayer::step5()
 
 void OchaLayer::step6()
 {
-    cocos2dExt::NativeInterface::putTextToWatch(this->_stepIndex++);
+    cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
         cocos2dExt::NativeInterface::speech("グイグイっ");
@@ -447,24 +480,33 @@ void OchaLayer::step6()
 
 void OchaLayer::step7()
 {
-    cocos2dExt::NativeInterface::putTextToWatch(this->_stepIndex++);
+    cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
         cocos2dExt::NativeInterface::speech("けっこうなお手前を頂戴しました。");
     };
 
+
+    auto end_func = [this]() {
+        if (auto scene = TitleLayer::createScene())
+        {
+            Director::getInstance()->replaceScene(TransitionFade::create(0.8f, scene));
+        }
+    };
+
     auto action = Sequence::create(
                                    CallFunc::create(func),
-                                   DelayTime::create(5.0f),
+                                   DelayTime::create(10.0f),
 
-                                   //自動で次のステップへ
-                                   CallFunc::create(CC_CALLBACK_0(OchaLayer::step1, this)),
+                                   //タイトルに戻る
+                                   CallFunc::create(end_func),
                                    nullptr);
     if (action)
     {
         this->runAction(action);
     }
 }
+
 
 //----------------------------------------------------
 //ゲームの初期化
@@ -499,12 +541,16 @@ void OchaLayer::createHero(){
 //----------------------------------------------------
 void OchaLayer::swingAnimation(bool isSwing)
 {
+    if (this->swingCnt >= SWING_COUNT)
+    {
+        return;
+    }
+
     if(isSwing && isSwingStart){
         swingCnt++;
         moveHero();
     }
-    isSwing = false;
-    
+    isSwing = !isSwing;
 }
 
 //----------------------------------------------------
@@ -519,9 +565,19 @@ void OchaLayer::moveHero()
         movePoint = Point(15.0f, 0.0f);
     }
     if(swingCnt == 1){ Point movePoint = Point(7.0f, 0.0f); }
-    
+
+    const auto isEnd = (swingCnt >= SWING_COUNT);
+    auto func = [this, isEnd]() {
+        if (isEnd)
+        {
+            this->step4();
+        }
+    };
+
     auto moveAct = MoveBy::create(0.1f, movePoint);
-    auto seq = Sequence::create(moveAct, nullptr);
+    auto seq = Sequence::create(moveAct,
+                                CallFunc::create(func),
+                                nullptr);
+
     hero->runAction(seq);
 }
-
