@@ -360,12 +360,12 @@ void OchaLayer::step1()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("こな入れてぇぇぇの");
+        cocos2dExt::NativeInterface::speech("お茶の粉を茶碗に入れます");
     };
 
     auto action = Sequence::create(
                                    CallFunc::create(func),
-                                   DelayTime::create(2.0f),
+                                   DelayTime::create(5.0f),
 
                                    //自動で次のステップへ
                                    CallFunc::create(CC_CALLBACK_0(OchaLayer::step2, this)),
@@ -382,12 +382,12 @@ void OchaLayer::step2()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("お湯入れてぇぇぇの");
+        cocos2dExt::NativeInterface::speech("次にお湯を茶碗に入れます");
     };
 
     auto action = Sequence::create(
                                    CallFunc::create(func),
-                                   DelayTime::create(2.0f),
+                                   DelayTime::create(5.0f),
 
                                    //自動で次のステップへ
                                    CallFunc::create(CC_CALLBACK_0(OchaLayer::step3, this)),
@@ -411,12 +411,12 @@ void OchaLayer::step3()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("お茶立ててぇぇぇの");
+        cocos2dExt::NativeInterface::speech("ちゃせんを使い、お茶たてます");
     };
 
     auto action = Sequence::create(
                                    CallFunc::create(func),
-                                   DelayTime::create(2.0f),
+                                   DelayTime::create(5.0f),
 
                                    //自動で次のステップへ
                                    //CallFunc::create(CC_CALLBACK_0(OchaLayer::step4, this)),
@@ -435,12 +435,12 @@ void OchaLayer::step4()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("お茶渡しぃぃの");
+        cocos2dExt::NativeInterface::speech("お茶碗を３回左回りに回します");
     };
 
     auto action = Sequence::create(
                                    CallFunc::create(func),
-                                   DelayTime::create(2.0f),
+                                   DelayTime::create(7.0f),
 
 //                                   //自動で次のステップへ
 //                                   CallFunc::create(CC_CALLBACK_0(OchaLayer::step5, this)),
@@ -465,12 +465,12 @@ void OchaLayer::step5()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("お茶まわしぃぃの");
+        cocos2dExt::NativeInterface::speech("茶碗の正面をお客様の方に向けて、茶碗を差し出します。");
     };
 
     auto action = Sequence::create(
                                    CallFunc::create(func),
-                                   DelayTime::create(2.0f),
+                                   DelayTime::create(8.0f),
 
 //                                   //自動で次のステップへ
 //                                   CallFunc::create(CC_CALLBACK_0(OchaLayer::step6, this)),
@@ -487,7 +487,7 @@ void OchaLayer::step6()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("グイグイっ");
+        cocos2dExt::NativeInterface::speech("お点前頂戴致します");
     };
 
     auto action = Sequence::create(
@@ -509,7 +509,7 @@ void OchaLayer::step7()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("けっこうなお手前を頂戴しました。");
+        cocos2dExt::NativeInterface::speech("結構なお点前で");
     };
 
     auto action = Sequence::create(
