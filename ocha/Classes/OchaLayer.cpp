@@ -647,13 +647,13 @@ void OchaLayer::createHero()
     yunomi1 = Hero::create(ImageType::yunomi1);
     yunomi1->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.45f));
     yunomi1->setScale(0.5f, 0.5f);
-    this->addChild(yunomi1, 0);
+    this->addChild(yunomi1, -1);
 
     maccha = Hero::create(ImageType::maccha);
     maccha->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.35f));
     maccha->setColor(Color3B::GRAY);
     maccha->setScale(0.5f, 0.5f);
-    this->addChild(maccha, 2);
+    this->addChild(maccha, 0);
 
     yunomi2 = Hero::create(ImageType::yunomi2);
     yunomi2->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.383f));
@@ -667,6 +667,11 @@ void OchaLayer::createHero()
 void OchaLayer::swingAnimation(bool isSwing)
 {
     if (this->swingCnt >= SWING_COUNT)
+    {
+        return;
+    }
+
+    if (hero->getActionByTag(999))
     {
         return;
     }
@@ -689,11 +694,6 @@ void OchaLayer::swingAnimation(bool isSwing)
 //----------------------------------------------------
 void OchaLayer::moveHero()
 {
-    if (hero->getActionByTag(999))
-    {
-        return;
-    }
-
     const auto isEnd = (swingCnt >= SWING_COUNT);
     auto func = [this, isEnd]() {
         if (isEnd)
