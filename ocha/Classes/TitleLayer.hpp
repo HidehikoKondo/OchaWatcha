@@ -19,6 +19,7 @@ protected:
     virtual ~TitleLayer();
 
 public:
+    static cocos2d::Scene * createScene();
     CREATE_FUNC(TitleLayer);
 
 protected:
