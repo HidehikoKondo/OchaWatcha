@@ -1,8 +1,9 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
 
-#include "Step4Layer.hpp"
-#include "OchaLayer.hpp"
+#include "audio/include/SimpleAudioEngine.h"
+
+#include "TitleLayer.hpp"
 
 
 USING_NS_CC;
@@ -98,13 +99,30 @@ bool AppDelegate::applicationDidFinishLaunching()
         director->setContentScaleFactor(scaleRate);
     }
 
+    if (auto fileUtils = FileUtils::getInstance())
+    {
+        std::vector<std::string> searchPaths;
+        {
+            searchPaths.push_back("fonts");
+            searchPaths.push_back("sounds");
+            searchPaths.push_back("res");
+        }
+        fileUtils->setSearchPaths(searchPaths);
+    }
+
     register_all_packages();
 
+
+    //CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("bgm.mp3");
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("bgm.mp3", true);
+
+
     // create a scene. it's an autorelease object
-    auto scene = OchaLayer::createScene();
+    auto scene = TitleLayer::createScene();
 
     // run
     director->runWithScene(scene);
+
 
     return true;
 }
