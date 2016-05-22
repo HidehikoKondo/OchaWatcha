@@ -105,81 +105,81 @@ bool OchaLayer::init()
 
 
 
-        //DEBUG 1
-        if (auto label = Label::createWithSystemFont("debug_label_guigui", "", 16.0f))
-        {
-            label->setName("debug_label_guigui");
-
-            const auto pos = Point(visibleRect.getMinX(), visibleRect.getMaxY() - 10.0f);
-            label->setPosition(pos);
-
-            label->setAlignment(TextHAlignment::LEFT, TextVAlignment::CENTER);
-            label->setAnchorPoint(Point::ANCHOR_MIDDLE_LEFT);
-
-            this->addChild(label);
-        }
-
-        //DEBUG 2
-        if (auto label = Label::createWithSystemFont("debug_label_guru x 2", "", 16.0f))
-        {
-            label->setName("debug_label_guru x 2");
-
-            const auto pos = Point(visibleRect.getMinX(), visibleRect.getMaxY() - 30.0f);
-            label->setPosition(pos);
-
-            label->setAlignment(TextHAlignment::LEFT, TextVAlignment::CENTER);
-            label->setAnchorPoint(Point::ANCHOR_MIDDLE_LEFT);
-
-            this->addChild(label);
-        }
-
-
-        //DEBUG 3 (仮ボタン)
-        if (auto label = Label::createWithSystemFont("swing", "", 32.0f))
-        {
-            auto callback = [this](Ref * pSender) {
-                if (this->getStepIndex() == 3)
-                {
-                    cocos2dExt::NativeInterface::getTextFromWatch("SWING");
-                }
-            };
-
-            if (auto item = MenuItemLabel::create(label, callback))
-            {
-                if (auto menu = Menu::createWithItem(item))
-                {
-                    const auto pos = visibleRect.origin + Point(visibleRect.size.width  * 0.1f,
-                                                                visibleRect.size.height * 0.5f);
-                    menu->setPosition(pos);
-
-                    this->addChild(menu);
-                }
-            }
-        }
-
-        //DEBUG 4 (仮ボタン)
-        if (auto label = Label::createWithSystemFont("douzo", "", 32.0f))
-        {
-            auto callback = [this](Ref * pSender) {
-                if (this->getStepIndex() == 4)
-                {
-                    cocos2dExt::NativeInterface::getTextFromWatch("DOUZO");
-                }
-            };
-
-            if (auto item = MenuItemLabel::create(label, callback))
-            {
-                if (auto menu = Menu::createWithItem(item))
-                {
-                    const auto pos = visibleRect.origin + Point(visibleRect.size.width * 0.1f,
-                                                                visibleRect.size.height * 0.25f);
-                    menu->setPosition(pos);
-
-                    this->addChild(menu);
-                }
-            }
-        }
-
+//        //DEBUG 1
+//        if (auto label = Label::createWithSystemFont("debug_label_guigui", "", 16.0f))
+//        {
+//            label->setName("debug_label_guigui");
+//
+//            const auto pos = Point(visibleRect.getMinX(), visibleRect.getMaxY() - 10.0f);
+//            label->setPosition(pos);
+//
+//            label->setAlignment(TextHAlignment::LEFT, TextVAlignment::CENTER);
+//            label->setAnchorPoint(Point::ANCHOR_MIDDLE_LEFT);
+//
+//            this->addChild(label);
+//        }
+//
+//        //DEBUG 2
+//        if (auto label = Label::createWithSystemFont("debug_label_guru x 2", "", 16.0f))
+//        {
+//            label->setName("debug_label_guru x 2");
+//
+//            const auto pos = Point(visibleRect.getMinX(), visibleRect.getMaxY() - 30.0f);
+//            label->setPosition(pos);
+//
+//            label->setAlignment(TextHAlignment::LEFT, TextVAlignment::CENTER);
+//            label->setAnchorPoint(Point::ANCHOR_MIDDLE_LEFT);
+//
+//            this->addChild(label);
+//        }
+//
+//
+//        //DEBUG 3 (仮ボタン)
+//        if (auto label = Label::createWithSystemFont("swing", "", 32.0f))
+//        {
+//            auto callback = [this](Ref * pSender) {
+//                if (this->getStepIndex() == 3)
+//                {
+//                    cocos2dExt::NativeInterface::getTextFromWatch("SWING");
+//                }
+//            };
+//
+//            if (auto item = MenuItemLabel::create(label, callback))
+//            {
+//                if (auto menu = Menu::createWithItem(item))
+//                {
+//                    const auto pos = visibleRect.origin + Point(visibleRect.size.width  * 0.1f,
+//                                                                visibleRect.size.height * 0.5f);
+//                    menu->setPosition(pos);
+//
+//                    this->addChild(menu);
+//                }
+//            }
+//        }
+//
+//        //DEBUG 4 (仮ボタン)
+//        if (auto label = Label::createWithSystemFont("douzo", "", 32.0f))
+//        {
+//            auto callback = [this](Ref * pSender) {
+//                if (this->getStepIndex() == 4)
+//                {
+//                    cocos2dExt::NativeInterface::getTextFromWatch("DOUZO");
+//                }
+//            };
+//
+//            if (auto item = MenuItemLabel::create(label, callback))
+//            {
+//                if (auto menu = Menu::createWithItem(item))
+//                {
+//                    const auto pos = visibleRect.origin + Point(visibleRect.size.width * 0.1f,
+//                                                                visibleRect.size.height * 0.25f);
+//                    menu->setPosition(pos);
+//
+//                    this->addChild(menu);
+//                }
+//            }
+//        }
+//
 
         result = true;
     } while (0);
@@ -366,12 +366,12 @@ void OchaLayer::step1()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("こな入れてぇぇぇの");
+        cocos2dExt::NativeInterface::speech("お茶の粉を茶碗に入れます");
     };
 
     auto action = Sequence::create(
                                    CallFunc::create(func),
-                                   DelayTime::create(2.0f),
+                                   DelayTime::create(5.0f),
 
                                    //自動で次のステップへ
                                    CallFunc::create(CC_CALLBACK_0(OchaLayer::step2, this)),
@@ -388,7 +388,7 @@ void OchaLayer::step2()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("お湯入れてぇぇぇの");
+        cocos2dExt::NativeInterface::speech("次にお湯を茶碗に入れます");
 
         if (this->maccha)
         {
@@ -399,7 +399,7 @@ void OchaLayer::step2()
 
     auto action = Sequence::create(
                                    CallFunc::create(func),
-                                   DelayTime::create(2.0f),
+                                   DelayTime::create(5.0f),
 
                                    //自動で次のステップへ
                                    CallFunc::create(CC_CALLBACK_0(OchaLayer::step3, this)),
@@ -437,23 +437,21 @@ void OchaLayer::step3()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("お茶立ててぇぇぇの");
+        cocos2dExt::NativeInterface::speech("ちゃせんを使い、お茶たてます");
     };
 
     auto action = Sequence::create(
                                    DelayTime::create(0.2f),
 
                                    CallFunc::create(func),
-                                   DelayTime::create(2.0f),
+                                   DelayTime::create(5.0f),
 
                                    //自動で次のステップへ
                                    //CallFunc::create(CC_CALLBACK_0(OchaLayer::step4, this)),
                                    nullptr);
     if (action)
     {
-        if(swingCnt >= 100){
-            this->runAction(action);
-        }
+        this->runAction(action);
     }
 }
 
@@ -478,14 +476,14 @@ void OchaLayer::step4()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("お茶渡しぃぃの");
+        cocos2dExt::NativeInterface::speech("茶碗の正面をお客様の方に向けて、茶碗を差し出します");
     };
 
     auto action = Sequence::create(
                                    DelayTime::create(0.3f),
 
                                    CallFunc::create(func),
-                                   DelayTime::create(2.0f),
+                                   DelayTime::create(7.0f),
 
 //                                   //自動で次のステップへ
 //                                   CallFunc::create(CC_CALLBACK_0(OchaLayer::step5, this)),
@@ -510,12 +508,12 @@ void OchaLayer::step5()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("お茶まわしぃぃの");
+        cocos2dExt::NativeInterface::speech("お茶碗を３回左回りに回します");
     };
 
     auto action = Sequence::create(
                                    CallFunc::create(func),
-                                   DelayTime::create(2.0f),
+                                   DelayTime::create(8.0f),
 
 //                                   //自動で次のステップへ
 //                                   CallFunc::create(CC_CALLBACK_0(OchaLayer::step6, this)),
@@ -532,7 +530,7 @@ void OchaLayer::step6()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("グイグイっ");
+        cocos2dExt::NativeInterface::speech("お点前頂戴致します");
     };
 
     auto action = Sequence::create(
@@ -554,13 +552,13 @@ void OchaLayer::step7()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("けっこうなお手前を頂戴しました。");
+        cocos2dExt::NativeInterface::speech("結構なお点前で");
     };
 
     auto action = Sequence::create(
-                                   CallFunc::create(func),
                                    DelayTime::create(6.0f),
-
+                                   CallFunc::create(func),
+                                   DelayTime::create(3.0f),
                                    //自動で次のステップへ
                                    CallFunc::create(CC_CALLBACK_0(OchaLayer::step8, this)),
                                    nullptr);
