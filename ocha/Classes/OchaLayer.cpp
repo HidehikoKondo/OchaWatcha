@@ -225,6 +225,12 @@ void OchaLayer::onEnter()
                     {
                         if (acc->y <= -0.9f)
                         {
+                            if (this->maccha)
+                            {
+                                auto action = MoveBy::create(1.0f, Point(0.0f, -50.0f));
+                                this->maccha->runAction(action);
+                            }
+
                             CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("drinking_a_hot_one2.mp3");
                             this->_accCheck2 = true;
                         }
@@ -383,6 +389,12 @@ void OchaLayer::step2()
 
     auto func = [this]() {
         cocos2dExt::NativeInterface::speech("お湯入れてぇぇぇの");
+
+        if (this->maccha)
+        {
+            auto action = MoveBy::create(1.0f, Point(0.0f, 50.0f));
+            this->maccha->runAction(action);
+        }
     };
 
     auto action = Sequence::create(
@@ -402,12 +414,26 @@ void OchaLayer::step2()
 void OchaLayer::step3()
 {
     //茶せん
-    hero = Hero::create(ImageType::chasen);
-    hero->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.6f));
-    hero->setScale(0.5f, 0.5f);
-    this->addChild(hero, 1);
+    {
+        hero = Hero::create(ImageType::chasen);
+        hero->setScale(0.5f, 0.5f);
+        hero->setAnchorPoint(Point(0.5f, 1.1f));
+
+        const auto size = hero->getBoundingBox().size;
+        hero->setPosition(Vec2(winSize.width*0.5f, winSize.height + size.height));
+        this->addChild(hero, 1);
+
+        {
+            auto pos = Point(winSize.width * 0.5f, winSize.height * 0.5f + size.height * 0.8f);
+            auto action = MoveTo::create(0.2f, pos);
+
+            hero->runAction(action);
+        }
+    }
+
+
     isSwingStart = true;    //お茶たて開始
-    
+
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
@@ -415,6 +441,8 @@ void OchaLayer::step3()
     };
 
     auto action = Sequence::create(
+                                   DelayTime::create(0.2f),
+
                                    CallFunc::create(func),
                                    DelayTime::create(2.0f),
 
@@ -432,6 +460,21 @@ void OchaLayer::step3()
 
 void OchaLayer::step4()
 {
+    //茶せん:
+    {
+        const auto size = hero->getBoundingBox().size;
+        {
+            auto pos = Point(winSize.width*0.5f, winSize.height + size.height);
+
+            auto action = Sequence::create(RotateTo::create(0.1f, 0.0f),
+                                           MoveTo::create(0.2f, pos),
+                                           nullptr);
+
+            hero->runAction(action);
+        }
+    }
+
+
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
@@ -439,6 +482,8 @@ void OchaLayer::step4()
     };
 
     auto action = Sequence::create(
+                                   DelayTime::create(0.3f),
+
                                    CallFunc::create(func),
                                    DelayTime::create(2.0f),
 
@@ -592,18 +637,19 @@ void OchaLayer::initGame(){
 //----------------------------------------------------
 //スプライトの生成
 //----------------------------------------------------
-void OchaLayer::createHero(){
-    
+void OchaLayer::createHero()
+{
     yunomi1 = Hero::create(ImageType::yunomi1);
     yunomi1->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.45f));
     yunomi1->setScale(0.5f, 0.5f);
     this->addChild(yunomi1, 0);
-    
+
     maccha = Hero::create(ImageType::maccha);
-    maccha->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.45f));
+    maccha->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.35f));
+    maccha->setColor(Color3B::GRAY);
     maccha->setScale(0.5f, 0.5f);
     this->addChild(maccha, 2);
-    
+
     yunomi2 = Hero::create(ImageType::yunomi2);
     yunomi2->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.383f));
     yunomi2->setScale(0.5f, 0.5f);
@@ -638,26 +684,49 @@ void OchaLayer::swingAnimation(bool isSwing)
 //----------------------------------------------------
 void OchaLayer::moveHero()
 {
-    Point movePoint = Point(15.0f, 0.0f);
-    if(swingCnt%2 == 0){
-        movePoint = Point(-15.0f, 0.0f);
-    }else{
-        movePoint = Point(15.0f, 0.0f);
+    if (hero->getActionByTag(999))
+    {
+        return;
     }
-    if(swingCnt == 1){ Point movePoint = Point(7.0f, 0.0f); }
 
     const auto isEnd = (swingCnt >= SWING_COUNT);
     auto func = [this, isEnd]() {
         if (isEnd)
         {
+            if (this->maccha)
+            {
+                auto action = TintTo::create(0.1f, 255, 255, 255);
+                this->maccha->runAction(action);
+            }
+
             this->step4();
         }
     };
 
-    auto moveAct = MoveBy::create(0.1f, movePoint);
-    auto seq = Sequence::create(moveAct,
+    auto rotate = RotateBy::create(0.02f, 20.0f);
+    auto seq = Sequence::create(rotate,
+                                rotate->reverse(),
+                                rotate->reverse(),
+                                rotate,
+
                                 CallFunc::create(func),
                                 nullptr);
+    if (seq)
+    {
+        if (this->maccha)
+        {
+            const auto color = this->maccha->getColor();
+            CCLOG("color: r:%3d, g:%3d, b:%3d", color.r, color.g, color.b);
 
-    hero->runAction(seq);
+            auto action = TintTo::create(0.02f,
+                                         MIN(color.r + 2, 255),
+                                         MIN(color.g + 2, 255),
+                                         MIN(color.b + 2, 255));
+            this->maccha->runAction(action);
+        }
+
+        seq->setTag(999);
+
+        hero->runAction(seq);
+    }
 }
