@@ -113,9 +113,14 @@ bool AppDelegate::applicationDidFinishLaunching()
     register_all_packages();
 
 
-    //CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("bgm.mp3");
-    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("bgm.mp3", true);
+    if (auto simpleAudio = CocosDenshion::SimpleAudioEngine::getInstance())
+    {
+        //CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("bgm.mp3");
+        simpleAudio->playBackgroundMusic("bgm.mp3", true);
 
+        simpleAudio->preloadEffect("drinking_a_hot_one2.mp3");
+        simpleAudio->preloadEffect("shakashaka.mp3");
+    }
 
     // create a scene. it's an autorelease object
     auto scene = TitleLayer::createScene();
