@@ -21,6 +21,9 @@ public:
     cocos2d::Size winSize;
     cocos2d::Sprite* hero;  //自機
     
+    cocos2d::Sprite* yunomi1;
+    cocos2d::Sprite* yunomi2;
+    
     
     static cocos2d::Scene* createScene();
     
@@ -35,7 +38,7 @@ protected:
     
     void createHero();  //自機の生成
     void swingAnimation(bool isSwing);
-    void moveReturnBullet();  //自機から敵へ返す
+    void moveHero();
 
     virtual bool init() override;
 

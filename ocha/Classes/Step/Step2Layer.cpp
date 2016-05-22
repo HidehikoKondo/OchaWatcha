@@ -62,16 +62,6 @@ Scene* Step2Layer::createScene(){
     return scene;
 }
 
-void Step2Layer::swingAnimation(bool isSwing)
-{
-    if(isSwing){
-        swingCnt++;
-        
-    }
-    isSwing = false;
-    
-}
-
 //----------------------------------------------------
 //ゲームの初期化
 //----------------------------------------------------
@@ -111,22 +101,46 @@ void Step2Layer::initGame(){
 }
 
 //----------------------------------------------------
-//自機の生成
+//スプライトの生成
 //----------------------------------------------------
 void Step2Layer::createHero(){
     //    log("createHero");
     //    log("visibleSize.width:%f, height:%f",visibleSize.width,visibleSize.height);
     //    log("winSize.width:%f, height:%f",winSize.width,winSize.height);
     //    log("origin.x:%f, y:%f",origin.x,origin.y);
+    
+    yunomi1 = Hero::create(ImageType::yunomi1);
+    yunomi1->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.45f));
+    yunomi1->setScale(0.5f, 0.5f);
+    this->addChild(yunomi1, 0);
+    
     hero = Hero::create(ImageType::chasen);
-    hero->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.2f));
-    this->addChild(hero, 0);
+    hero->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.6f));
+    hero->setScale(0.5f, 0.5f);
+    this->addChild(hero, 1);
+    
+    yunomi2 = Hero::create(ImageType::yunomi2);
+    yunomi2->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.383f));
+    yunomi2->setScale(0.5f, 0.5f);
+    this->addChild(yunomi2, 2);
+    
+
+}
+
+void Step2Layer::swingAnimation(bool isSwing)
+{
+    if(isSwing){
+        swingCnt++;
+        moveHero();
+    }
+    isSwing = false;
+    
 }
 
 //----------------------------------------------------
 //
 //----------------------------------------------------
-void Step2Layer::moveReturnBullet()
+void Step2Layer::moveHero()
 {//(Bullet* bullet){
 //    CallFunc *racketEffectSoundPlayCF = CallFunc::create([=](){
 //        CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioUtils::getFileName(SoundFileName.at(SoundType::racketEffect).c_str()).c_str());
@@ -149,6 +163,17 @@ void Step2Layer::moveReturnBullet()
 //    auto spn = Spawn::create(seq, scaleAct, nullptr);
 //    
 //    bullet->runAction(spn);
+    Point movePoint = Point(15.0f, 0.0f);
+    if(swingCnt%2 == 0){
+        movePoint = Point(-15.0f, 0.0f);
+    }else{
+        movePoint = Point(15.0f, 0.0f);
+    }
+    if(swingCnt == 1){ Point movePoint = Point(7.0f, 0.0f); }
+    
+    auto moveAct = MoveBy::create(0.1f, movePoint);
+    auto seq = Sequence::create(moveAct, nullptr);
+    hero->runAction(seq);
 }
 
 //----------------------------------------------------

@@ -58,6 +58,12 @@ bool OchaLayer::init()
             break;
         }
 
+        //お茶たて用
+        visibleSize = Director::getInstance()->getVisibleSize();
+        origin = Director::getInstance()->getVisibleOrigin();
+        winSize = Director::getInstance()->getWinSize();
+        initGame();  //ゲームの初期化
+        
         auto visibleRect = Rect::ZERO;
         {
             visibleRect.origin = Director::getInstance()->getVisibleOrigin();
@@ -202,6 +208,7 @@ void OchaLayer::onEnter()
                 const auto message = data->asString();
                 if (message.compare("SWING") == 0)
                 {
+                    this->swingAnimation(isSwing = true);
                     //「シャカシャカ」
                 }
                 else if (message.compare("DOUZO") == 0)
@@ -335,6 +342,13 @@ void OchaLayer::step2()
 
 void OchaLayer::step3()
 {
+    //茶せん
+    hero = Hero::create(ImageType::chasen);
+    hero->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.6f));
+    hero->setScale(0.5f, 0.5f);
+    this->addChild(hero, 1);
+    isSwingStart = true;    //お茶たて開始
+    
     cocos2dExt::NativeInterface::putTextToWatch(this->_stepIndex++);
 
     auto func = [this]() {
@@ -357,6 +371,9 @@ void OchaLayer::step3()
 
 void OchaLayer::step4()
 {
+    hero->removeFromParent();  //茶せん消去
+    isSwingStart = false;  //お茶たて終了
+    
     //最初の方位を取得
     this->_rotateStep       = cocos2dExt::NativeInterface::getCompass().x;
     this->_rotateLastStep   = this->_rotateStep;
@@ -446,3 +463,63 @@ void OchaLayer::step7()
         this->runAction(action);
     }
 }
+
+//----------------------------------------------------
+//ゲームの初期化
+//----------------------------------------------------
+void OchaLayer::initGame(){
+    createHero();  //自機の生成
+}
+
+//----------------------------------------------------
+//スプライトの生成
+//----------------------------------------------------
+void OchaLayer::createHero(){
+    
+    yunomi1 = Hero::create(ImageType::yunomi1);
+    yunomi1->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.45f));
+    yunomi1->setScale(0.5f, 0.5f);
+    this->addChild(yunomi1, 0);
+    
+    maccha = Hero::create(ImageType::maccha);
+    maccha->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.45f));
+    maccha->setScale(0.5f, 0.5f);
+    this->addChild(maccha, 2);
+    
+    yunomi2 = Hero::create(ImageType::yunomi2);
+    yunomi2->setPosition(Vec2(winSize.width*0.5f, winSize.height*0.383f));
+    yunomi2->setScale(0.5f, 0.5f);
+    this->addChild(yunomi2, 3);
+}
+
+//----------------------------------------------------
+//
+//----------------------------------------------------
+void OchaLayer::swingAnimation(bool isSwing)
+{
+    if(isSwing && isSwingStart){
+        swingCnt++;
+        moveHero();
+    }
+    isSwing = false;
+    
+}
+
+//----------------------------------------------------
+//
+//----------------------------------------------------
+void OchaLayer::moveHero()
+{
+    Point movePoint = Point(15.0f, 0.0f);
+    if(swingCnt%2 == 0){
+        movePoint = Point(-15.0f, 0.0f);
+    }else{
+        movePoint = Point(15.0f, 0.0f);
+    }
+    if(swingCnt == 1){ Point movePoint = Point(7.0f, 0.0f); }
+    
+    auto moveAct = MoveBy::create(0.1f, movePoint);
+    auto seq = Sequence::create(moveAct, nullptr);
+    hero->runAction(seq);
+}
+

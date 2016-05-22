@@ -26,7 +26,7 @@ const std::map<ImageType, std::string> ImageFileName
 {
     {ImageType::chasen, "chasen.png"},
     {ImageType::maccha, "maccha.png"},
-    {ImageType::yunomi1, "yunomi1.png"},
+    {ImageType::yunomi1, "yunomi.png"},
     {ImageType::yunomi2, "yunomi2.png"},
     {ImageType::retry, "retry.png"},
 };

@@ -10,14 +10,32 @@
 #define OchaLayer_hpp
 
 #include "cocos2d.h"
-
+#include "Hero.h"
 
 class OchaLayer : public cocos2d::Layer
 {
+public:
+    cocos2d::Size visibleSize;
+    cocos2d::Vec2 origin;
+    cocos2d::Size winSize;
+    cocos2d::Sprite* hero;
+    cocos2d::Sprite* maccha;
+    cocos2d::Sprite* yunomi1;
+    cocos2d::Sprite* yunomi2;
+protected:
+    int swingCnt;
+    bool isSwing;
+    bool isSwingStart;
+    
+    void initGame();
+    
+    void createHero();  //自機の生成
+    void swingAnimation(bool isSwing);
+    void moveHero();
+
 protected:
     OchaLayer();
     virtual ~OchaLayer();
-
 
 public:
     static cocos2d::Scene * createScene();
