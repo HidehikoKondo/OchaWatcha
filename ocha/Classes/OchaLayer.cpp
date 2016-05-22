@@ -237,13 +237,19 @@ void OchaLayer::onEnter()
                 const auto message = data->asString();
                 if (message.compare("SWING") == 0)
                 {
-                    this->swingAnimation(isSwing = true);
                     //「シャカシャカ」
+                    if (this->getStepIndex() == 3)
+                    {
+                        this->swingAnimation(isSwing = true);
+                    }
                 }
                 else if (message.compare("DOUZO") == 0)
                 {
                     //「どうぞ」
-                    this->step6();
+                    if (this->getStepIndex() == 5)
+                    {
+                        this->step6();
+                    }
                 }
             }
         };
