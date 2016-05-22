@@ -77,6 +77,23 @@ bool OchaLayer::init()
         }
 
 
+        if (auto sprite = Sprite::create("title/background.png"))
+        {
+            const auto size = sprite->getContentSize();
+
+            const auto rate = MAX(visibleRect.size.width  / size.width,
+                                  visibleRect.size.height / size.height);
+            sprite->setScale(rate);
+
+            auto pos = Point::ZERO;
+            pos = Point(visibleRect.getMidX(), visibleRect.getMidY());
+
+            sprite->setPosition(pos);
+
+            this->addChild(sprite, -10);
+        }
+
+
         //傾き検知用
         if (auto input = InputLayer::create())
         {
