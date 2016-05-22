@@ -437,7 +437,7 @@ void OchaLayer::step3()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("ちゃせんを使い、お茶たてます");
+        cocos2dExt::NativeInterface::speech("ちゃせんを使い、お茶をたてます");
     };
 
     auto action = Sequence::create(
@@ -476,7 +476,7 @@ void OchaLayer::step4()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("茶碗の正面をお客様の方に向けて、茶碗を差し出します");
+        cocos2dExt::NativeInterface::speech("茶碗の正面をお客様のほうに向けて、茶碗を差し出します");
     };
 
     auto action = Sequence::create(
@@ -508,7 +508,7 @@ void OchaLayer::step5()
     cocos2dExt::NativeInterface::putTextToWatch(++this->_stepIndex);
 
     auto func = [this]() {
-        cocos2dExt::NativeInterface::speech("お茶碗を３回左回りに回します");
+        cocos2dExt::NativeInterface::speech("お茶碗を３回、左回りに回します");
     };
 
     auto action = Sequence::create(
@@ -556,9 +556,9 @@ void OchaLayer::step7()
     };
 
     auto action = Sequence::create(
-                                   DelayTime::create(6.0f),
+                                   DelayTime::create(4.0f),
                                    CallFunc::create(func),
-                                   DelayTime::create(3.0f),
+                                   DelayTime::create(2.0f),
                                    //自動で次のステップへ
                                    CallFunc::create(CC_CALLBACK_0(OchaLayer::step8, this)),
                                    nullptr);
