@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A8DF0B21E3A5AF7961384C0C74A1BEC006FE0A4A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "8F60819D35BB4CFE1BBA39A9A8C8D9A60CB72767" : 9223372036854775807,
+    "A8DF0B21E3A5AF7961384C0C74A1BEC006FE0A4A" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "092EBE35-8C7A-4BA5-8F46-3851C194B723",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "8F60819D35BB4CFE1BBA39A9A8C8D9A60CB72767" : "",
+    "A8DF0B21E3A5AF7961384C0C74A1BEC006FE0A4A" : "ochawatcha\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ocha",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ocha\/proj.ios_mac\/ocha.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/udonkoapps\/pacmeme.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8F60819D35BB4CFE1BBA39A9A8C8D9A60CB72767"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/udonkoapps\/ocha.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A8DF0B21E3A5AF7961384C0C74A1BEC006FE0A4A"
+    }
+  ]
+}
